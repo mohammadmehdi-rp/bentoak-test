@@ -28,6 +28,8 @@ function RegisterPage() {
         setInputErrors(errorsData);
       } else {
         setInputErrors(undefined);
+
+        localStorage.setItem("bentoak-test-user", JSON.stringify(user));
       }
     });
   };
@@ -42,7 +44,7 @@ function RegisterPage() {
         }}
       >
         <Typography component="h1" variant="h5">
-          Register
+          bentoak-test Registration
         </Typography>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField
