@@ -2,11 +2,11 @@ import { IsEmail, IsStrongPassword, Length } from "class-validator";
 
 export default class User {
   @Length(3, 20)
-  fullName: string;
+  fullName!: string;
 
   @IsEmail()
-  email: string;
+  email!: string;
 
   @IsStrongPassword()
-  password: string;
+  password!: string;
 }

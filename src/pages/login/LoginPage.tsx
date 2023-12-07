@@ -1,12 +1,21 @@
-import { Box, Button, Link, TextField, Typography } from "@mui/material";
+import {
+  Alert,
+  Box,
+  Button,
+  Link,
+  Snackbar,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { validate } from "class-validator";
 import { USER_AUTHENTICATION_KEY } from "const";
 import { AuthLayout } from "layouts";
 import { User } from "models";
 import { useState } from "react";
 
-function RegisterPage() {
+function LoginPage() {
   const [inputErrors, setInputErrors] = useState<User>();
+  const [message, setMessage] = useState<string | undefined>();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -14,10 +23,9 @@ function RegisterPage() {
 
     let user = new User();
     user.email = data.get("email")?.toString() || "";
-    user.fullName = data.get("fullName")?.toString() || "";
     user.password = data.get("password")?.toString() || "";
 
-    validate(user).then((errors) => {
+    validate(user, { skipMissingProperties: true }).then((errors) => {
       if (errors.length > 0) {
         const errorsData: any = {};
         errors.map(
@@ -30,7 +38,12 @@ function RegisterPage() {
       } else {
         setInputErrors(undefined);
 
-        localStorage.setItem(USER_AUTHENTICATION_KEY, JSON.stringify(user));
+        const user = localStorage.getItem(USER_AUTHENTICATION_KEY);
+
+        if (user) {
+        } else {
+          setMessage("Please Register First!");
+        }
       }
     });
   };
@@ -45,21 +58,9 @@ function RegisterPage() {
         }}
       >
         <Typography component="h1" variant="h5">
-          bentoak-test Registration
+          bentoak-test Login
         </Typography>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="fullName"
-            label="FullName"
-            name="fullName"
-            autoComplete="fullName"
-            autoFocus
-            error={!!inputErrors?.fullName}
-            helperText={inputErrors?.fullName}
-          />
           <TextField
             margin="normal"
             required
@@ -101,13 +102,24 @@ function RegisterPage() {
             }}
           >
             <Link href="#" variant="body2">
-              {"Already have an account? Login"}
+              {"Don't have an account? Register"}
             </Link>
           </Box>
         </Box>
       </Box>
+      <Snackbar
+        open={!!message}
+        autoHideDuration={6000}
+        onClose={() => {
+          setMessage(undefined);
+        }}
+      >
+        <Alert severity="error" sx={{ width: "100%" }}>
+          {message}
+        </Alert>
+      </Snackbar>
     </AuthLayout>
   );
 }
 
-export default RegisterPage;
+export default LoginPage;

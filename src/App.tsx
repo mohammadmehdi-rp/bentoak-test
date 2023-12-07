@@ -1,10 +1,10 @@
 import "./App.css";
-import { RegisterPage } from "./pages";
+import { LoginPage } from "./pages";
 
 function App() {
   return (
     <div>
-      <RegisterPage></RegisterPage>
+      <LoginPage></LoginPage>
     </div>
   );
 }

@@ -17,8 +17,7 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "strictPropertyInitialization": false
+    "experimentalDecorators": true
   },
   "include": ["src"]
 }
