@@ -1,12 +1,23 @@
-import { Box, Button, Link, TextField, Typography } from "@mui/material";
+import {
+  Alert,
+  Box,
+  Button,
+  Link,
+  Snackbar,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { validate } from "class-validator";
 import { USER_AUTHENTICATION_KEY } from "const";
 import { AuthLayout } from "layouts";
 import { User } from "models";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function RegisterPage() {
+  const navigate = useNavigate();
   const [inputErrors, setInputErrors] = useState<User>();
+  const [message, setMessage] = useState<string | undefined>();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -28,9 +39,12 @@ function RegisterPage() {
 
         setInputErrors(errorsData);
       } else {
+        setMessage("Succuss Registration");
         setInputErrors(undefined);
 
         localStorage.setItem(USER_AUTHENTICATION_KEY, JSON.stringify(user));
+
+        navigate("/auth/login");
       }
     });
   };
@@ -100,12 +114,23 @@ function RegisterPage() {
               alignItems: "center",
             }}
           >
-            <Link href="#" variant="body2">
+            <Link href={"/auth/login"} variant="body2">
               {"Already have an account? Login"}
             </Link>
           </Box>
         </Box>
       </Box>
+      <Snackbar
+        open={!!message}
+        autoHideDuration={6000}
+        onClose={() => {
+          setMessage(undefined);
+        }}
+      >
+        <Alert severity="success" sx={{ width: "100%" }}>
+          Registration Has Been Completed
+        </Alert>
+      </Snackbar>
     </AuthLayout>
   );
 }

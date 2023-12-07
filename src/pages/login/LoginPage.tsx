@@ -12,8 +12,10 @@ import { USER_AUTHENTICATION_KEY } from "const";
 import { AuthLayout } from "layouts";
 import { User } from "models";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
+  const navigate = useNavigate();
   const [inputErrors, setInputErrors] = useState<User>();
   const [message, setMessage] = useState<string | undefined>();
 
@@ -41,6 +43,7 @@ function LoginPage() {
         const user = localStorage.getItem(USER_AUTHENTICATION_KEY);
 
         if (user) {
+          navigate("/");
         } else {
           setMessage("Please Register First!");
         }
@@ -101,7 +104,7 @@ function LoginPage() {
               alignItems: "center",
             }}
           >
-            <Link href="#" variant="body2">
+            <Link href={"/auth/register"} variant="body2">
               {"Don't have an account? Register"}
             </Link>
           </Box>

@@ -4,6 +4,8 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { ThemeProvider, createTheme } from "@mui/material";
+import { RouterProvider } from "react-router-dom";
+import { ROUTER } from "routes";
 
 const defaultTheme = createTheme();
 
@@ -12,6 +14,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
+    <RouterProvider router={ROUTER} />
     <ThemeProvider theme={defaultTheme}>
       <App />
     </ThemeProvider>
