@@ -1,7 +1,7 @@
-import { MainLayout } from "layouts";
+import { AuthLayout } from "layouts";
 
 function RegisterPage() {
-  return <MainLayout>Hi</MainLayout>;
+  return <AuthLayout>Hi</AuthLayout>;
 }
 
 export default RegisterPage;
