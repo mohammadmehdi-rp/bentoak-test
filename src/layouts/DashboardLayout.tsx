@@ -114,7 +114,6 @@ function DashboardLayout({ children }: { children: React.ReactNode }) {
               p: 2,
               display: "flex",
               flexDirection: "column",
-              height: 240,
             }}
           >
             {children}
