@@ -45,6 +45,7 @@ function DashboardProductsPage() {
   );
 
   useEffect(() => {
+    setPage(0);
     refetch();
   }, [debouncedSearchString, refetch]);
 
