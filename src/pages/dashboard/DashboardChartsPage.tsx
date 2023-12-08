@@ -2,7 +2,21 @@ import { CircularProgress, Grid, Typography } from "@mui/material";
 import { DashboardLayout } from "layouts";
 import { useMemo } from "react";
 import { useQuery } from "react-query";
-import { Cell, Pie, PieChart } from "recharts";
+import {
+  CartesianGrid,
+  Cell,
+  Line,
+  LineChart,
+  Pie,
+  PieChart,
+  PolarAngleAxis,
+  PolarGrid,
+  PolarRadiusAxis,
+  Radar,
+  RadarChart,
+  Tooltip,
+  XAxis,
+} from "recharts";
 import { TComments, TPosts } from "types";
 import { QUERY_KEYS } from "utils";
 
@@ -60,7 +74,10 @@ function DashboardChartsPage() {
 
   return (
     <DashboardLayout>
-      {isLoading || isRefetching ? (
+      {isLoading ||
+      isRefetching ||
+      isLoadingComments ||
+      isRefetchingComments ? (
         <div
           style={{
             display: "flex",
@@ -85,8 +102,8 @@ function DashboardChartsPage() {
             </Grid>
           </Grid>
           <Grid container marginBottom={"20px"} rowSpacing={1}>
-            <Grid style={{ display: "flex", alignSelf: "center" }} item md={6}>
-              {/* <LineChart
+            <Grid style={{ display: "flex", alignSelf: "center" }} item md={4}>
+              <LineChart
                 width={400}
                 height={400}
                 data={postDataCounts}
@@ -97,13 +114,13 @@ function DashboardChartsPage() {
                 <CartesianGrid stroke="#f5f5f5" />
                 <Line
                   type="monotone"
-                  dataKey={"count"}
+                  dataKey={"value"}
                   stroke="#387908"
                   yAxisId={1}
                 />
-              </LineChart> */}
+              </LineChart>
             </Grid>
-            <Grid style={{ alignSelf: "center" }} item md={6}>
+            <Grid style={{ alignSelf: "center" }} item md={4}>
               <PieChart width={800} height={400}>
                 <Pie
                   data={postDataCounts}
@@ -126,6 +143,25 @@ function DashboardChartsPage() {
               <Typography style={{ fontWeight: "600", marginLeft: "30px" }}>
                 Posts each user has written
               </Typography>
+            </Grid>
+
+            <Grid style={{ display: "flex", alignSelf: "center" }} item md={4}>
+              <RadarChart
+                height={500}
+                width={500}
+                outerRadius="80%"
+                data={commentsData}
+              >
+                <PolarGrid />
+                <PolarAngleAxis dataKey="name" />
+                <PolarRadiusAxis />
+                <Radar
+                  dataKey="id"
+                  stroke="green"
+                  fill="green"
+                  fillOpacity={0.5}
+                />
+              </RadarChart>
             </Grid>
           </Grid>
         </>
