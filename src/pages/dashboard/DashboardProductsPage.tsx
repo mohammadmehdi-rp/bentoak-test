@@ -29,10 +29,11 @@ const searchProductsUrl = (query: string) =>
 function DashboardProductsPage() {
   const [searchText, setSearchText] = useState<string>("");
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
   const debouncedSearchString = useDebounce(searchText, 700);
 
   const {
+    isLoading,
     isRefetching,
     data: productData,
     refetch,
@@ -62,7 +63,7 @@ function DashboardProductsPage() {
 
   return (
     <DashboardLayout>
-      {isRefetching ? (
+      {isLoading || isRefetching ? (
         <div
           style={{
             display: "flex",

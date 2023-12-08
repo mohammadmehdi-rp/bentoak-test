@@ -1,4 +1,9 @@
-import { DashboardProductsPage, LoginPage, RegisterPage } from "pages";
+import {
+  DashboardChartsPage,
+  DashboardProductsPage,
+  LoginPage,
+  RegisterPage,
+} from "pages";
 import { createBrowserRouter } from "react-router-dom";
 
 export const ROUTER = createBrowserRouter([
@@ -20,6 +25,6 @@ export const ROUTER = createBrowserRouter([
   },
   {
     path: "/dashboard/charts",
-    element: <>charts</>,
+    element: <DashboardChartsPage />,
   },
 ]);

@@ -7,4 +7,6 @@ export const MENUS = [
 
 export const QUERY_KEYS = Object.freeze({
   products: "products",
+  posts: "posts",
+  comments: "comments",
 });
