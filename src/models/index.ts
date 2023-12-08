@@ -1,1 +1,1 @@
-export { default as User } from "./User";
+export { UserLogin, UserRegistration } from "./User";
