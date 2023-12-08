@@ -5,7 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { ThemeProvider, createTheme } from "@mui/material";
 import { RouterProvider } from "react-router-dom";
-import { ROUTER } from "routes";
+import { ROUTER } from "utils";
 
 const defaultTheme = createTheme();
 

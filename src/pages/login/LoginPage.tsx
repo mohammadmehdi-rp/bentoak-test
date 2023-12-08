@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import { validate } from "class-validator";
-import { USER_AUTHENTICATION_KEY } from "const";
+import { USER_AUTHENTICATION_KEY } from "utils/const";
 import { AuthLayout } from "layouts";
 import { UserLogin, UserRegistration } from "models";
 import { useState } from "react";

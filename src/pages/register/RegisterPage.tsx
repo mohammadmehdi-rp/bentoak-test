@@ -1,7 +1,7 @@
 import { classValidatorResolver } from "@hookform/resolvers/class-validator";
 import { Box, Button, Link, TextField, Typography } from "@mui/material";
 import { validate } from "class-validator";
-import { USER_AUTHENTICATION_KEY } from "const";
+import { USER_AUTHENTICATION_KEY } from "utils/const";
 import { AuthLayout } from "layouts";
 import { UserRegistration } from "models";
 import { useForm } from "react-hook-form";
