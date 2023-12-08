@@ -6,18 +6,23 @@ import reportWebVitals from "./reportWebVitals";
 import { ThemeProvider, createTheme } from "@mui/material";
 import { RouterProvider } from "react-router-dom";
 import { ROUTER } from "utils";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 const defaultTheme = createTheme();
+
+const queryClient = new QueryClient();
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <RouterProvider router={ROUTER} />
-    <ThemeProvider theme={defaultTheme}>
-      <App />
-    </ThemeProvider>
+    <QueryClientProvider contextSharing={true} client={queryClient}>
+      <RouterProvider router={ROUTER} />
+      <ThemeProvider theme={defaultTheme}>
+        <App />
+      </ThemeProvider>
+    </QueryClientProvider>
   </React.StrictMode>
 );
 

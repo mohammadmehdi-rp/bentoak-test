@@ -1,12 +1,7 @@
-import MainLayout from "./MainLayout";
 import "./styles.css";
 
 function AuthLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <MainLayout>
-      <div className="container">{children}</div>
-    </MainLayout>
-  );
+  return <div className="container">{children}</div>;
 }
 
 export default AuthLayout;
