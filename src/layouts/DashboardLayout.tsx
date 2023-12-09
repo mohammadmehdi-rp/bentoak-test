@@ -1,4 +1,4 @@
-import { Menu } from "@mui/icons-material";
+import { Logout, Menu } from "@mui/icons-material";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import {
   Box,
@@ -10,20 +10,28 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-import { AppBar, Drawer } from "components";
+import { AlertModal, AppBar, Drawer } from "components";
 import { UserRegistration } from "models";
 import { useState } from "react";
 import { MENUS, USER_AUTHENTICATION_KEY } from "utils";
 import AuthGuard from "./AuthGuard";
+import { useNavigate } from "react-router-dom";
 
 function DashboardLayout({ children }: { children: React.ReactNode }) {
+  const navigate = useNavigate();
   const userInfo: UserRegistration = JSON.parse(
     localStorage.getItem(USER_AUTHENTICATION_KEY) ?? "{}"
   );
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [open, setOpen] = useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem(USER_AUTHENTICATION_KEY);
+    setIsModalOpen(false);
+    navigate("/auth/login");
   };
 
   return (
@@ -56,6 +64,10 @@ function DashboardLayout({ children }: { children: React.ReactNode }) {
             >
               Dashboard
             </Typography>
+            <IconButton onClick={() => setIsModalOpen(true)} color="error">
+              <Logout color="error" sx={{ marginRight: "4px" }} />
+              Logout
+            </IconButton>
             <IconButton color="inherit">{`Welcome ${userInfo?.fullName}`}</IconButton>
           </Toolbar>
         </AppBar>
@@ -121,6 +133,23 @@ function DashboardLayout({ children }: { children: React.ReactNode }) {
             </Paper>
           </Container>
         </Box>
+        <AlertModal
+          open={isModalOpen}
+          title={"Logout"}
+          description={
+            "you are about to logout of your account, are you sure ?"
+          }
+          agreeButton={{
+            name: "Logout",
+            onClick: handleLogout,
+          }}
+          disagreeButton={{
+            name: "Cancel",
+            onClick: () => {
+              setIsModalOpen(false);
+            },
+          }}
+        />
       </Box>
     </AuthGuard>
   );

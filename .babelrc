@@ -1,8 +1,0 @@
-{
-    "plugins": [
-      ["babel-plugin-root-import", {
-        "rootPathSuffix": "the-preferred/root/of-all-your/js/files",
-        "rootPathPrefix": "@"
-      }]
-    ]
-  }
